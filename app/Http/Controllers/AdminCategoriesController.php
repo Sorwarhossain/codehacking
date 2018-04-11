@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
+use App\Http\Requests\AdminCategoriesRequest;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use Illuminate\Support\Facades\Session;
 
 class AdminCategoriesController extends Controller
 {
@@ -15,18 +18,10 @@ class AdminCategoriesController extends Controller
      */
     public function index()
     {
-        //
+        $categories = Category::all();
+        return view('admin.categories.index', compact('categories'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -34,9 +29,11 @@ class AdminCategoriesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AdminCategoriesRequest $request)
     {
-        //
+        Category::create($request->all());
+        Session::flash('cat_created', 'Category has been created');
+        return redirect('/admin/categories');
     }
 
     /**
@@ -58,7 +55,8 @@ class AdminCategoriesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $category = Category::findOrFail($id);
+        return view('admin.categories.edit', compact('category'));
     }
 
     /**
@@ -68,9 +66,12 @@ class AdminCategoriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(AdminCategoriesRequest $request, $id)
     {
-        //
+        $cat = Category::findOrFail($id);
+        $cat->update($request->all());
+        Session::flash('cat_updated', 'Category has been updated');
+        return redirect('/admin/categories');
     }
 
     /**
@@ -81,6 +82,8 @@ class AdminCategoriesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Category::findOrFail($id)->delete();
+        Session::flash('cat_deleted', 'Category has been deleted');
+        return redirect('/admin/categories');
     }
 }
