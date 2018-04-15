@@ -105,7 +105,7 @@ class AdminPostController extends Controller
             $input['photo_id'] = $photo->id;
         }
 
-        Auth::user()->posts()->whereId($id)->first()->update($input);
+        Post::whereId($id)->first()->update($input);
         Session::flash('post_updated', 'The post has been updated');
         return redirect('/admin/posts');
     }
@@ -127,4 +127,16 @@ class AdminPostController extends Controller
 
         return redirect('/admin/posts');
     }
+
+
+    public function post($id){
+        $post = Post::findOrFail($id);
+        $comments = $post->comments()->whereIsActive(1)->get();
+        return view('post', compact('post', 'comments'));
+    }
+
+
+
+
+
 }

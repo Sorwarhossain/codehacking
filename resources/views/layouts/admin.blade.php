@@ -17,6 +17,9 @@
     <link href="{{asset('css/metisMenu.css')}}" rel="stylesheet">
     <link href="{{asset('css/sb-admin-2.css')}}" rel="stylesheet">
     <link href="{{asset('css/blog-post.css')}}" rel="stylesheet">
+
+    @yield('head_style')
+
     <link href="{{asset('css/styles.css')}}" rel="stylesheet">
 
 
@@ -145,6 +148,10 @@
                                 <a href="{{route('admin.categories.index')}}">All Categories</a>
                             </li>
 
+                            <li>
+                                <a href="{{route('admin.comments.index')}}">Comments</a>
+                            </li>
+
                         </ul>
                         <!-- /.nav-second-level -->
                     </li>
@@ -154,20 +161,16 @@
                         <a href="#"><i class="fa fa-wrench fa-fw"></i>Media<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="/media">All Media</a>
+                                <a href="{{route('admin.media.index')}}">All Media</a>
                             </li>
 
                             <li>
-                                <a href="">Upload Media</a>
+                                <a href="{{route('admin.media.create')}}">Upload Media</a>
                             </li>
 
                         </ul>
                         <!-- /.nav-second-level -->
                     </li>
-
-
-
-
 
 
 
@@ -342,6 +345,9 @@
 <script src="{{asset('js/bootstrap.min.js')}}"></script>
 <script src="{{asset('js/metisMenu.js')}}"></script>
 <script src="{{asset('js/sb-admin-2.js')}}"></script>
+
+@yield('footer_scripts')
+
 <script src="{{asset('js/scripts.js')}}"></script>
 
 </body>

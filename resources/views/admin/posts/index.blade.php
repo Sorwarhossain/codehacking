@@ -52,6 +52,10 @@
                     <td>{{$post->category->name}}</td>
                     <td>{{$post->created_at->diffForHumans()}}</td>
                     <td>{{$post->updated_at->diffForHumans()}}</td>
+                    <td>
+                        <a href="{{route('home.post', $post->id)}}">View Post</a><br>
+                        <a href="{{route('admin.comments.show', $post->id)}}">Comments</a>
+                    </td>
                 </tr>
             @endforeach
         @endif
