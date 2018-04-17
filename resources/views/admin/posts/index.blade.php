@@ -61,4 +61,10 @@
         @endif
         </tbody>
     </table>
+
+    <div class="row">
+        <div class="col-md-8 col-md-offset text-center">
+            {{$posts->links()}}
+        </div>
+    </div>
 @endsection
